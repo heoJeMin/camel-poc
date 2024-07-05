@@ -2,23 +2,20 @@ package com.airpremia.camelpoc.route
 
 import org.apache.camel.LoggingLevel
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder
+import org.springframework.stereotype.Component
 
-//@Component
+@Component
 class DebeziumExample : EndpointRouteBuilder() {
     override fun configure() {
 //        implementation("org.apache.camel.springboot:camel-debezium-mysql-starter:$camelVersion")
 //        implementation("org.apache.camel:camel-debezium-mysql:$camelVersion")
 //        implementation("com.mysql:mysql-connector-j")
-
-        /*
-        kafka와 같이 사용해야 함.
-         */
         onException(Exception::class.java)
             .log(LoggingLevel.ERROR, "데이터베이스 연결 실패: \${exception.message}")
 
         from(
             debeziumMysql("job_bd")
-                .offsetStorage("file.dat")
+                .offsetStorage("classpath:/offset.text")
                 .topicPrefix("prefix")
                 .databaseHostname("localhost")
                 .databaseUser("local_user")
