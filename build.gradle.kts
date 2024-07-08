@@ -41,6 +41,8 @@ dependencies {
 
     implementation("org.apache.camel.springboot:camel-bean-starter:$camelVersion")
 
+    implementation("org.apache.camel:camel-ftp:$camelVersion")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("com.mysql:mysql-connector-j")
